@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Player } from 'immino-lib';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'kadro-kurucu';
+
+  players: Player[] = [];
 }
