@@ -1,0 +1,75 @@
+    <button nz-button (click)="addNewPlayer()" nzType="primary">New Player</button>
+    <br />
+    <br />
+    <nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th *ngFor="let column of listOfColumn">
+            {{ column.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of sortTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.strength }}</td>
+          <td>{{ data?.position }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <nz-drawer
+      [nzClosable]="false"
+      [nzVisible]="isVisibleDrawer"
+      nzPlacement="right"
+      [nzTitle]="nzTitle"
+      (nzOnClose)="close()"
+      nzSize="large"
+    >
+      <ng-template #nzTitle>
+        <div class="drawer-title">
+          New Player(s)
+        </div>
+      </ng-template>
+      <ng-container *nzDrawerContent>
+        <nz-collapse>
+          <nz-collapse-panel
+            nzHeader="Add New Player"
+            nzActive="true"
+            nzShowArrow="true"
+          >
+            <ng-container>
+              <form nz-form [formGroup]="newPlayerForm" >
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
+                  <nz-form-control [nzSpan]="10" nzErrorTip="Please input player name">
+                    <input type="text" nz-input formControlName="name" placeholder="Please input player name" />
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="4"nzRequired nzFor="strength">
+                    Strength
+                  </nz-form-label>
+                  <nz-form-control [nzSpan]="10"  nzErrorTip="Please input player strength">
+                    <input type="number" nz-input formControlName="strength" placeholder="Please input player strength" (ngModelChange)="onStrengthChange($event)" />
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+            </ng-container>
+
+
+
+          </nz-collapse-panel>
+          <nz-collapse-panel
+            nzHeader="Add New Players"
+            nzActive="false"
+            nzShowArrow="true"
+          >
+            <ng-container>
+              <textarea style="margin:0;" rows="10" nz-input [(ngModel)]="inputValue"></textarea>
+            </ng-container>
+
+          </nz-collapse-panel>
+        </nz-collapse>
+      </ng-container>
+    </nz-drawer>

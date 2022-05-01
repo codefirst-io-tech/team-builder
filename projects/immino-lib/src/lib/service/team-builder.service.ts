@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Player, Team, Tier } from '../models';
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,10 @@ import { Player, Team, Tier } from '../models';
 export class TeamBuilderService {
   private runCounter = 1;
   private differenceThreshold = 3;
+  players!: Player[];
+
+  constructor(private notification: NzNotificationService) {
+  }
 
   private static shuffle(players: Player[]) {
     for (let i = players.length - 1; i > 0; i--) {
@@ -141,5 +146,49 @@ export class TeamBuilderService {
 
   private calculateAverage(firstTeamPlayers: Player[]) {
     return firstTeamPlayers.reduce((acc, player) => acc + player.strength, 0) / firstTeamPlayers.length;
+  }
+
+  isThisPlayerExist(playerName: String): boolean{
+    return this.players.some(player => player.name === playerName);
+  }
+
+  areThesePlayersExist(players: Player[]){
+    const isEveryoneNotExist = players.every(newPlayer => this.players.some(oldPlayer => oldPlayer.name !== newPlayer.name));
+    return !isEveryoneNotExist;
+  }
+
+  addSinglePlayer(player: Player){
+    if(this.isThisPlayerExist(player.name)){
+      this.notification.create(
+        "error",
+        'Çooook kritikkk',
+        'Bu oyuncu zaten ekli olduğu için tekrar ekleyemezsiniz!'
+      );
+    }else {
+      this.players.push(player);
+    }
+  }
+
+  addNewPlayers(players: Player[]){
+    if(this.areThesePlayersExist(players)){
+      this.notification.create(
+        "error",
+        'Çooook kritikkk',
+        'Bu oyuncular bazıları/hepsi zaten ekli olduğu için tekrar ekleyemezsiniz!'
+      );
+    }else{
+      this.players = [...this.players,...players];
+    }
+  }
+
+  deletePlayer(player: Player){
+    const indexOfPlayer = this.players.indexOf(player);
+    if(indexOfPlayer !== -1){
+      this.players.splice(indexOfPlayer, 0);
+    }
+  }
+
+  deleteAllPlayers(){
+    this.players = [];
   }
 }

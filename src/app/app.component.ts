@@ -10,4 +10,5 @@ export class AppComponent {
   title = 'kadro-kurucu';
 
   players: Player[] = [];
+
 }

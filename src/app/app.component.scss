@@ -1,0 +1,40 @@
+.layout {
+  min-height: 100vh;
+}
+
+.logo {
+  float: left;
+}
+
+nz-header {
+  position: fixed;
+  width: 100%;
+}
+
+[nz-menu] {
+  line-height: 64px;
+}
+
+nz-content {
+  padding: 0 50px;
+  margin-top: 64px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  background: #fff;
+  padding: 24px;
+  margin-top: 10px;
+  min-height: 380px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.table{
+  margin-top: 25px;
+}

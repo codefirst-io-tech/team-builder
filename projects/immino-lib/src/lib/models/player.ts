@@ -7,7 +7,7 @@ export enum Tier {
 }
 
 export class Player {
-  constructor(private name: string, public strength: number, private position?: Position) {
+  constructor(public name: string, public strength: number, public position?: Position) {
   }
 
   get tier(): Tier {
