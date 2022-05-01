@@ -8,7 +8,6 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 export class TeamBuilderService {
   private runCounter = 1;
   private differenceThreshold = 3;
-  players!: Player[];
 
   constructor(private notification: NzNotificationService) {
   }
@@ -148,47 +147,47 @@ export class TeamBuilderService {
     return firstTeamPlayers.reduce((acc, player) => acc + player.strength, 0) / firstTeamPlayers.length;
   }
 
-  isThisPlayerExist(playerName: String): boolean{
-    return this.players.some(player => player.name === playerName);
+  isThisPlayerExist(playerName: String,playerList: Player[]): boolean{
+    return playerList.some(player => player.name === playerName);
   }
 
-  areThesePlayersExist(players: Player[]){
-    const isEveryoneNotExist = players.every(newPlayer => this.players.some(oldPlayer => oldPlayer.name !== newPlayer.name));
+  areThesePlayersExist(players: Player[],playerList: Player[]){
+    const isEveryoneNotExist = players.every(newPlayer => playerList.some(oldPlayer => oldPlayer.name !== newPlayer.name));
     return !isEveryoneNotExist;
   }
 
-  addSinglePlayer(player: Player){
-    if(this.isThisPlayerExist(player.name)){
+  addSinglePlayer(newPlayer: Player,playerList: Player[]){
+    if(this.isThisPlayerExist(newPlayer.name, playerList)){
       this.notification.create(
         "error",
         'Çooook kritikkk',
         'Bu oyuncu zaten ekli olduğu için tekrar ekleyemezsiniz!'
       );
     }else {
-      this.players.push(player);
+      playerList.push(newPlayer);
     }
   }
 
-  addNewPlayers(players: Player[]){
-    if(this.areThesePlayersExist(players)){
+  addNewPlayers(newPlayers: Player[], playerList: Player[]){
+    if(this.areThesePlayersExist(newPlayers, playerList)){
       this.notification.create(
         "error",
         'Çooook kritikkk',
         'Bu oyuncular bazıları/hepsi zaten ekli olduğu için tekrar ekleyemezsiniz!'
       );
     }else{
-      this.players = [...this.players,...players];
+      playerList = [...playerList,...newPlayers];
     }
   }
 
-  deletePlayer(player: Player){
-    const indexOfPlayer = this.players.indexOf(player);
+  deletePlayer(player: Player, playerList: Player[]){
+    const indexOfPlayer = playerList.indexOf(player);
     if(indexOfPlayer !== -1){
-      this.players.splice(indexOfPlayer, 0);
+      playerList.splice(indexOfPlayer, 0);
     }
   }
 
-  deleteAllPlayers(){
-    this.players = [];
+  deleteAllPlayers(playerList: Player[]){
+    playerList = [];
   }
 }
