@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { Player } from '../models';
 
-import { TeamBuilderService } from './team-builder.service';
+import { AbidinoTeamBuilderService } from './abidino-team-builder.service';
+import {Player} from "immino-lib";
+import {TeamBuilderUtil} from "../../util/team-builder.util";
 
 const getMockPlayers = () => {
   return [
@@ -22,32 +23,31 @@ const getMockPlayers = () => {
   ];
 }
 
-describe('TeamBuilderService', () => {
-  let service: TeamBuilderService;
+describe('AbidinoTeamBuilderService', () => {
+  let service: AbidinoTeamBuilderService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TeamBuilderService);
+    service = TestBed.inject(AbidinoTeamBuilderService);
   });
 
 
   it('should calculate total strength of players', () => {
     const players = getMockPlayers();
-    expect(service.calculateTotalStrength(players)).toBe(61);
+    expect(TeamBuilderUtil.calculateTotalStrength(players)).toBe(61);
   });
 
   it('should build two teams with recursive method', () => {
     const players = getMockPlayers();
-    const teams = service.buildTeamsRecursively(players);
-
+    const teams = service.buildTeams(players);
     console.log({teams});
-
     expect(teams.length).toBe(2);
   });
 
   it('should build two teams with same size of members', () => {
     const players = getMockPlayers();
-    const teams = service.buildTeamsRecursively(players);
+    const teams = service.buildTeams(players);
+    console.log("aaa");
 
     expect(teams[0].members.length).toEqual(teams[1].members.length);
   });
