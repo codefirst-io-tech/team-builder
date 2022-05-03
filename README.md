@@ -4,4 +4,6 @@
 
 #### Run below commads to start development
 
-```ng build immino-lib```
+    $ cd kadro-kurucu
+    $ npm install
+    $ npm start
