@@ -7,12 +7,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
-    "paths": {
-      "immino-lib": [
-        "dist/immino-lib/immino-lib",
-        "dist/immino-lib"
-      ]
-    },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
