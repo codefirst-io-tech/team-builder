@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Player } from '@codefirst-io/team-builder/src/lib/models';
-import { TeamBuilderService } from '@codefirst-io/team-builder/src/lib/services';
+import { Player, TeamBuilderService } from '@codefirst-io/team-builder';
 
 @Component({
   selector: 'app-root',

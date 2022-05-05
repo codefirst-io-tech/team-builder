@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {Player} from "immino-lib";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Player } from '@codefirst-io/team-builder';
 
 @Component({
   selector: 'app-player-table',
@@ -21,10 +20,10 @@ export class PlayerTableComponent {
     {
       title: 'Position',
       priority: 2
-    },
+    }
   ];
 
-  listOfData: Player[] = []
+  listOfData: Player[] = [];
   isVisibleDrawer = false;
   newPlayerForm = this.fb.group({
     name: [null, [Validators.required]],
@@ -33,12 +32,12 @@ export class PlayerTableComponent {
   });
   inputValue?: string;
 
-  get newPlayerStrengthForm(): FormControl{
-    return this.newPlayerForm.get('strength') as FormControl;
+  constructor(private fb: FormBuilder) {
   }
 
-  constructor(private fb: FormBuilder) {}
-
+  get newPlayerStrengthForm(): FormControl {
+    return this.newPlayerForm.get('strength') as FormControl;
+  }
 
   close(): void {
     this.isVisibleDrawer = false;
@@ -49,9 +48,9 @@ export class PlayerTableComponent {
   }
 
   onStrengthChange(value: any) {
-    if(value > 10){
+    if (value > 10) {
       this.newPlayerStrengthForm.setValue(10);
-    }else if(value < 0){
+    } else if (value < 0) {
       this.newPlayerStrengthForm.setValue(0);
     }
   }
