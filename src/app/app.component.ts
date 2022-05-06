@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Player, TeamBuilderService } from '@codefirst-io/team-builder';
+import {Component} from '@angular/core';
+import {AbidinoTeamBuilderService, Player, TeamBuilderService} from '@codefirst-io/team-builder';
+import {PlayerService} from "./player/player.service";
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,10 @@ import { Player, TeamBuilderService } from '@codefirst-io/team-builder';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'kadro-kurucu';
+  players :Player[] = [];
 
-  constructor() {
-    const teamBuilder =  TeamBuilderService;
+  title = 'kadro-kurucu';
+  constructor(private playerService: PlayerService) {
 
     const players = [
       new Player('player6', 9),
@@ -29,7 +30,15 @@ export class AppComponent {
       new Player('player8', 2)
     ];
 
-    const teams = teamBuilder.buildTeams(players);
-    console.log({teams});
+    this.playerService.players$.subscribe(data => {
+      this.players = data;
+    });
+  }
+
+  kadroOlustur(){
+    console.log(this.players);
+    const teams = AbidinoTeamBuilderService.buildTeams(this.players);
+    console.log('Team 1: ' + teams[0].members.map(value => value.strength));
+    console.log('Team 2: ' + teams[1].members.map(value => value.strength));
   }
 }

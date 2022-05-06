@@ -18,29 +18,43 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzMenuModule} from "ng-zorro-antd/menu";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzSliderModule} from "ng-zorro-antd/slider";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {PlayerStrengthComponentModule} from "./player/player-strength/player-strength.component";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerTableComponent
+    PlayerTableComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        NzTableModule,
-        NzLayoutModule,
-        NzButtonModule,
-        NzDrawerModule,
-        NzFormModule,
-        ReactiveFormsModule,
-        NzInputModule,
-        NzCollapseModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NzTableModule,
+    NzLayoutModule,
+    NzButtonModule,
+    NzDrawerModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzCollapseModule,
+    NzDatePickerModule,
+    NzSelectModule,
+    NzMenuModule,
+    NzIconModule,
+    NzSliderModule,
+    NzInputNumberModule,
+    PlayerStrengthComponentModule,
+  ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
