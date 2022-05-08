@@ -10,7 +10,7 @@ import {PlayerService} from "./player/player.service";
 export class AppComponent {
   players :Player[] = [];
 
-  title = 'kadro-kurucu';
+  title = 'team-builder';
   constructor(private playerService: PlayerService) {
 
     const players = [

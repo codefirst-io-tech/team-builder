@@ -9,6 +9,6 @@ https://ambitious-island-0b2b4ed03.1.azurestaticapps.net/
 
 #### Run below commads to start development
 
-    $ cd kadro-kurucu
+    $ cd team-builder
     $ npm install
     $ npm start
