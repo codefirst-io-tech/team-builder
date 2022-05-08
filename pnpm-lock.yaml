@@ -12,7 +12,7 @@ specifiers:
   '@angular/platform-browser': ~13.3.0
   '@angular/platform-browser-dynamic': ~13.3.0
   '@angular/router': ~13.3.0
-  '@codefirst-io/team-builder': ^0.0.2
+  '@codefirst-io/team-builder': ^0.0.3
   '@types/jasmine': ~3.10.0
   '@types/node': ^12.11.1
   '@types/puppeteer': ^5.4.6
@@ -27,6 +27,7 @@ specifiers:
   rxjs: ~7.5.0
   tslib: ^2.3.0
   typescript: ~4.6.2
+  webpack-bundle-analyzer: ^4.5.0
   zone.js: ~0.11.4
 
 dependencies:
@@ -38,7 +39,7 @@ dependencies:
   '@angular/platform-browser': 13.3.6_2rajfh3xclvchnp3g3xxhham7i
   '@angular/platform-browser-dynamic': 13.3.6_lz2qkkmlzon6tbij4zn3nov5xm
   '@angular/router': 13.3.6_apovh72rludrccmw3sg7rzjiqm
-  '@codefirst-io/team-builder': 0.0.2_tslib@2.4.0
+  '@codefirst-io/team-builder': 0.0.3_tslib@2.4.0
   ng-zorro-antd: 13.2.1_vpqf355zaywniee7qs64u6pwsm
   rxjs: 7.5.5
   tslib: 2.4.0
@@ -59,6 +60,7 @@ devDependencies:
   karma-jasmine-html-reporter: 1.7.0_4qbev7clgp2tes32y2gwlw65ne
   puppeteer: 13.7.0
   typescript: 4.6.4
+  webpack-bundle-analyzer: 4.5.0
 
 packages:
 
@@ -1615,8 +1617,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@codefirst-io/team-builder/0.0.2_tslib@2.4.0:
-    resolution: {integrity: sha512-HfhT775ZgkYwO47i+UHPxZYaCCn9h0ZB6k8tN5ANm+PgzGJ9qA5Gn3oa9F64ikCsJrVvIwJXq4sQ4xGxj/4E8w==}
+  /@codefirst-io/team-builder/0.0.3_tslib@2.4.0:
+    resolution: {integrity: sha512-1byM/6BXHAm3LgQekpLOvWWc8Hu+wjAbvybdE70CAvbr+bJfsZTMg+r2eCHyB5QDARW917iiEIVnIFyQ0biiQg==}
     peerDependencies:
       tslib: ^2.3.0
     dependencies:
@@ -1803,6 +1805,10 @@ packages:
       read-package-json-fast: 2.0.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@polka/url/1.0.0-next.21:
+    resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
   /@schematics/angular/13.3.5:
@@ -2116,6 +2122,11 @@ packages:
       acorn: ^8
     dependencies:
       acorn: 8.7.1
+    dev: true
+
+  /acorn-walk/8.2.0:
+    resolution: {integrity: sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==}
+    engines: {node: '>=0.4.0'}
     dev: true
 
   /acorn/8.7.1:
@@ -2726,6 +2737,11 @@ packages:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: true
 
+  /commander/7.2.0:
+    resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
+    engines: {node: '>= 10'}
+    dev: true
+
   /commondir/1.0.1:
     resolution: {integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=}
     dev: true
@@ -3175,6 +3191,10 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: true
+
+  /duplexer/0.1.2:
+    resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
 
   /ee-first/1.1.1:
@@ -3922,6 +3942,13 @@ packages:
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+    dev: true
+
+  /gzip-size/6.0.0:
+    resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
+    engines: {node: '>=10'}
+    dependencies:
+      duplexer: 0.1.2
     dev: true
 
   /handle-thing/2.0.1:
@@ -5010,6 +5037,11 @@ packages:
     hasBin: true
     dev: true
 
+  /mrmime/1.0.0:
+    resolution: {integrity: sha512-a70zx7zFfVO7XpnQ2IX1Myh9yY4UYvfld/dikWRnsXxbyvMcfz+u6UfgNAtH+k2QqtJuzVpv6eLTx1G2+WKZbQ==}
+    engines: {node: '>=10'}
+    dev: true
+
   /ms/2.0.0:
     resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=}
     dev: true
@@ -5326,6 +5358,11 @@ packages:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
       is-wsl: 2.2.0
+    dev: true
+
+  /opener/1.5.2:
+    resolution: {integrity: sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==}
+    hasBin: true
     dev: true
 
   /ora/5.4.1:
@@ -6447,6 +6484,15 @@ packages:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
 
+  /sirv/1.0.19:
+    resolution: {integrity: sha512-JuLThK3TnZG1TAKDwNIqNq6QA2afLOCcm+iE8D1Kj3GA40pSPsxQjjJl0J8X3tsR7T+CP1GavpzLwYkgVLWrZQ==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@polka/url': 1.0.0-next.21
+      mrmime: 1.0.0
+      totalist: 1.1.0
+    dev: true
+
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -6860,6 +6906,11 @@ packages:
     engines: {node: '>=0.6'}
     dev: true
 
+  /totalist/1.1.0:
+    resolution: {integrity: sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==}
+    engines: {node: '>=6'}
+    dev: true
+
   /tr46/0.0.3:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
@@ -7017,6 +7068,25 @@ packages:
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=}
+    dev: true
+
+  /webpack-bundle-analyzer/4.5.0:
+    resolution: {integrity: sha512-GUMZlM3SKwS8Z+CKeIFx7CVoHn3dXFcUAjT/dcZQQmfSZGvitPfMob2ipjai7ovFFqPvTqkEZ/leL4O0YOdAYQ==}
+    engines: {node: '>= 10.13.0'}
+    hasBin: true
+    dependencies:
+      acorn: 8.7.1
+      acorn-walk: 8.2.0
+      chalk: 4.1.2
+      commander: 7.2.0
+      gzip-size: 6.0.0
+      lodash: 4.17.21
+      opener: 1.5.2
+      sirv: 1.0.19
+      ws: 7.5.7
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: true
 
   /webpack-dev-middleware/5.3.0_webpack@5.70.0:
@@ -7206,6 +7276,19 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
+    dev: true
+
+  /ws/7.5.7:
+    resolution: {integrity: sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==}
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
     dev: true
 
   /ws/8.2.3:
