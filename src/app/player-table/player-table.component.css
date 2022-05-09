@@ -1,1 +1,9 @@
+.single-add-button {
+  position: absolute;
+  right: 313px;
+  top: 236px;
+}
 
+.multiple-add-button{
+  position: absolute;
+}

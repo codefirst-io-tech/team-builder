@@ -1,7 +1,7 @@
     <button nz-button (click)="addNewPlayer()" nzType="primary">New Player</button>
     <br />
     <br />
-    <nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+    <nz-table #sortTable [nzData]="playerList" nzTableLayout="fixed">
       <thead>
         <tr>
           <th *ngFor="let column of listOfColumn">
@@ -11,9 +11,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of sortTable.data">
-          <td>{{ data.name }}</td>
+<!--          <td>{{ data.name }}</td>-->
           <td>{{ data.strength }}</td>
-          <td>{{ data?.position }}</td>
+<!--          <td>{{ data?.position }}</td>-->
         </tr>
       </tbody>
     </nz-table>
@@ -23,7 +23,8 @@
       [nzVisible]="isVisibleDrawer"
       nzPlacement="right"
       [nzTitle]="nzTitle"
-      (nzOnClose)="close()"
+      [nzFooter]="footer"
+      (nzOnClose)="closeDrawer()"
       nzSize="large"
     >
       <ng-template #nzTitle>
@@ -56,9 +57,6 @@
                 </nz-form-item>
               </form>
             </ng-container>
-
-
-
           </nz-collapse-panel>
           <nz-collapse-panel
             nzHeader="Add New Players"
@@ -68,8 +66,13 @@
             <ng-container>
               <textarea style="margin:0;" rows="10" nz-input [(ngModel)]="inputValue"></textarea>
             </ng-container>
-
           </nz-collapse-panel>
         </nz-collapse>
       </ng-container>
+      <ng-template #footer>
+        <div style="float: right">
+          <button nz-button style="margin-right: 8px;" (click)="closeDrawer()">Cancel</button>
+          <button nz-button nzType="primary" (click)="saveNewPlayer()">Save</button>
+        </div>
+      </ng-template>
     </nz-drawer>
