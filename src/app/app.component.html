@@ -1,20 +1,22 @@
-<!-- NG-KADRO-KURUCU -->
 <nz-layout class="layout">
   <nz-header>
     <img src="assets/img/logo.png" class="logo" alt="">
-    <!--    <ul nz-menu nzTheme="dark" nzMode="horizontal">-->
-    <!--      <li nz-menu-item>nav 1</li>-->
-    <!--      <li nz-menu-item>nav 2</li>-->
-    <!--      <li nz-menu-item>nav 3</li>-->
-    <!--    </ul>-->
+        <ul nz-menu nzTheme="dark" nzMode="horizontal">
+          <li nz-menu-item>nav 1</li>
+          <li nz-menu-item>nav 2</li>
+          <li nz-menu-item>nav 3</li>
+        </ul>
   </nz-header>
   <nz-content>
     <div class="inner-content">
-
       <div class="table">
         <app-player-table></app-player-table>
       </div>
     </div>
   </nz-content>
+  <div style="display: flex; justify-content: end; margin-right: 50px">
+    <br><br>
+    <button nz-button nzType="primary" (click)="kadroOlustur()">Create Teams</button>
+  </div>
   <nz-footer>Bu Kadro Kurucu Öyle Bir Kadro Kurucu Ki</nz-footer>
 </nz-layout>
