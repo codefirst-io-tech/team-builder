@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Player} from "@codefirst-io/team-builder/src/lib/models";
+import {AbidinoTeamBuilderService} from "@codefirst-io/team-builder";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -25,7 +27,17 @@ export class PlayerTableComponent {
     },
   ];
 
-  playerList: Player[] = [ new Player('player6', 9)]
+  playerList: Player[] = [
+    new Player('player6', 9),
+    new Player('player10', 8),
+    new Player('player3', 7),
+    new Player('player1', 6),
+    new Player('player4', 6),
+    new Player('player9', 5),
+    new Player('player11', 5),
+    new Player('player12', 5),
+    new Player('player2', 4),
+  ]
   isVisibleDrawer = false;
   newPlayerForm = this.fb.group({
     name: [null, [Validators.required]],
@@ -33,6 +45,7 @@ export class PlayerTableComponent {
     position: [null]
   });
   inputValue!: string;
+  separateKey = environment.separateKey;
 
   get newPlayerStrengthFormControl(): FormControl{
     return this.newPlayerForm.get('strength') as FormControl;
@@ -79,8 +92,8 @@ export class PlayerTableComponent {
     let lines = this.inputValue.split(/[\r\n]+/);
     for (const line of lines){
       const lastIndex = line.length -1;
-      line[lastIndex] === ':' ? line.slice(lastIndex,0) : null;
-      const parsedLine = line.split(':');
+      line[lastIndex] === this.separateKey ? line.slice(lastIndex,0) : null;
+      const parsedLine = line.split(this.separateKey);
       const isLineValid = parsedLine.every(a => a !== '');
       if(isLineValid){
         const newPlayer = new Player(parsedLine[0], Number(parsedLine[1]));
@@ -89,5 +102,11 @@ export class PlayerTableComponent {
     }
     this.inputValue = '';
     this.closeDrawer();
+  }
+
+  buildTeams() {
+    const teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
+    console.log('Team 1: ' + teams[0].members.map(value => value.strength));
+    console.log('Team 2: ' + teams[1].members.map(value => value.strength));
   }
 }

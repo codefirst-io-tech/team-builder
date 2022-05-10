@@ -25,6 +25,7 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzSliderModule} from "ng-zorro-antd/slider";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {PlayerStrengthComponentModule} from "./player/player-strength/player-strength.component";
+import {NzSpaceModule} from "ng-zorro-antd/space";
 
 registerLocaleData(en);
 
@@ -33,28 +34,29 @@ registerLocaleData(en);
     AppComponent,
     PlayerTableComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NzTableModule,
-    NzLayoutModule,
-    NzButtonModule,
-    NzDrawerModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NzInputModule,
-    NzCollapseModule,
-    NzDatePickerModule,
-    NzSelectModule,
-    NzMenuModule,
-    NzIconModule,
-    NzSliderModule,
-    NzInputNumberModule,
-    PlayerStrengthComponentModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NzTableModule,
+        NzLayoutModule,
+        NzButtonModule,
+        NzDrawerModule,
+        NzFormModule,
+        ReactiveFormsModule,
+        NzInputModule,
+        NzCollapseModule,
+        NzDatePickerModule,
+        NzSelectModule,
+        NzMenuModule,
+        NzIconModule,
+        NzSliderModule,
+        NzInputNumberModule,
+        PlayerStrengthComponentModule,
+        NzSpaceModule,
+    ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
