@@ -26,6 +26,9 @@ import {NzSliderModule} from "ng-zorro-antd/slider";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {PlayerStrengthComponentModule} from "./player/player-strength/player-strength.component";
 import {NzSpaceModule} from "ng-zorro-antd/space";
+import { TeamListComponent } from './team-list/team-list.component';
+import {NzListModule} from "ng-zorro-antd/list";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 registerLocaleData(en);
 
@@ -33,30 +36,33 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     PlayerTableComponent,
+    TeamListComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        NzTableModule,
-        NzLayoutModule,
-        NzButtonModule,
-        NzDrawerModule,
-        NzFormModule,
-        ReactiveFormsModule,
-        NzInputModule,
-        NzCollapseModule,
-        NzDatePickerModule,
-        NzSelectModule,
-        NzMenuModule,
-        NzIconModule,
-        NzSliderModule,
-        NzInputNumberModule,
-        PlayerStrengthComponentModule,
-        NzSpaceModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NzTableModule,
+    NzLayoutModule,
+    NzButtonModule,
+    NzDrawerModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzCollapseModule,
+    NzDatePickerModule,
+    NzSelectModule,
+    NzMenuModule,
+    NzIconModule,
+    NzSliderModule,
+    NzInputNumberModule,
+    PlayerStrengthComponentModule,
+    NzSpaceModule,
+    NzListModule,
+    NzModalModule,
+  ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })

@@ -86,3 +86,14 @@
     </div>
   </ng-template>
 </nz-drawer>
+
+
+<nz-modal [(nzVisible)]="isVisibleTeamList"
+          nzTitle="Teams"
+          [nzFooter]="null"
+          (nzOnCancel)="handleCancelModal()"
+          nzWidth="990px">
+  <ng-container *nzModalContent>
+    <app-team-list [data]="teams"></app-team-list>
+  </ng-container>
+</nz-modal>

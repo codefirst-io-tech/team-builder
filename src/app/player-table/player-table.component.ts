@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Player} from "@codefirst-io/team-builder/src/lib/models";
+import {Player, Team} from "@codefirst-io/team-builder/src/lib/models";
 import {AbidinoTeamBuilderService} from "@codefirst-io/team-builder";
 import {environment} from "../../environments/environment";
 
@@ -27,25 +27,19 @@ export class PlayerTableComponent {
     },
   ];
 
-  playerList: Player[] = [
-    new Player('player6', 9),
-    new Player('player10', 8),
-    new Player('player3', 7),
-    new Player('player1', 6),
-    new Player('player4', 6),
-    new Player('player9', 5),
-    new Player('player11', 5),
-    new Player('player12', 5),
-    new Player('player2', 4),
-  ]
+  playerList: Player[] = []
   isVisibleDrawer = false;
+  isVisibleTeamList = false;
+  inputValue!: string;
+  separateKey = environment.separateKey;
+  teams: Team[] = [];
+
   newPlayerForm = this.fb.group({
     name: [null, [Validators.required]],
     strength: [null, [Validators.required]],
     position: [null]
   });
-  inputValue!: string;
-  separateKey = environment.separateKey;
+
 
   get newPlayerStrengthFormControl(): FormControl{
     return this.newPlayerForm.get('strength') as FormControl;
@@ -105,8 +99,11 @@ export class PlayerTableComponent {
   }
 
   buildTeams() {
-    const teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
-    console.log('Team 1: ' + teams[0].members.map(value => value.strength));
-    console.log('Team 2: ' + teams[1].members.map(value => value.strength));
+    this.teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
+    this.isVisibleTeamList = true;
+  }
+
+  handleCancelModal(): void {
+    this.isVisibleTeamList = false;
   }
 }
