@@ -5,18 +5,26 @@
         (click)="buildTeams()">Create Teams
   <i nz-icon nzType="right" ></i>
 </button>
+<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="deletePlayer()" >Delete Player</button>
+<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="editPlayer()" >Edit Player</button>
 <br/>
 <br/>
 <nz-table #sortTable [nzData]="playerList" nzTableLayout="fixed">
   <thead>
   <tr>
-    <th *ngFor="let column of listOfColumn">
-      {{ column.title }}
-    </th>
+    <th nzWidth="5%"></th>
+    <th>Player</th>
+    <th>Strength</th>
+    <th>Position</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of sortTable.data">
+    <td>
+      <nz-radio-group [(ngModel)]="radioValue">
+    <label nz-radio nzValue="{{ data.name }}"></label>
+    </nz-radio-group>
+    </td>
     <td>{{ data.name }}</td>
     <td>{{ data.strength }}</td>
     <td>{{ data?.position }}</td>
@@ -77,6 +85,15 @@
           <textarea style="margin:0;" rows="10" nz-input [(ngModel)]="inputValue"></textarea>
         </ng-container>
       </nz-collapse-panel>
+      <nz-collapse-panel
+        nzHeader="Add New Players From Excel"
+        nzActive="false"
+        nzShowArrow="true"
+      >
+        <ng-container>
+          <input type="file" (change)="onFileChange($event)" multiple="false" title="Import from excel" />
+        </ng-container>
+      </nz-collapse-panel>
     </nz-collapse>
   </ng-container>
   <ng-template #footer>
@@ -95,5 +112,30 @@
           nzWidth="990px">
   <ng-container *nzModalContent>
     <app-team-list [data]="teams"></app-team-list>
+  </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisiblePlayerEdit"
+          nzTitle="Player Edit"
+          (nzOnOk)="saveEditPlayer()"
+          (nzOnCancel)="handleCancelModalPlayerEdit()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="editPlayerForm">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
+        <nz-form-control [nzSpan]="10" nzErrorTip="Please input player name">
+          <input type="text" nz-input formControlName="name" placeholder="Please input player name"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="strength">
+          Strength
+        </nz-form-label>
+        <nz-form-control [nzSpan]="10" nzErrorTip="Please input player strength">
+          <input type="number" nz-input formControlName="strength" placeholder="Please input player strength"
+                 (ngModelChange)="onEditStrengthChange($event)"/>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
   </ng-container>
 </nz-modal>
