@@ -1,49 +1,99 @@
 <button nz-button (click)="addNewPlayer()" nzType="primary">New Player</button>
+<button *ngIf="(playerList.length % 2 === 0) && (playerList.length > 9)"
+        nz-button nzType="primary"
+        style="margin-left: 5px;"
+        (click)="buildTeams()">Create Teams
+  <i nz-icon nzType="right" ></i>
+</button>
 <br/>
 <br/>
-
-<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+<nz-table #sortTable [nzData]="playerList" nzTableLayout="fixed">
   <thead>
   <tr>
-    <th>Player</th>
-    <th>Strength</th>
+    <th *ngFor="let column of listOfColumn">
+      {{ column.title }}
+    </th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of sortTable.data">
     <td>{{ data.name }}</td>
     <td>{{ data.strength }}</td>
+    <td>{{ data?.position }}</td>
   </tr>
   </tbody>
 </nz-table>
 
 <nz-drawer
-  [nzBodyStyle]="{ overflow: 'auto' }"
-  [nzMaskClosable]="false"
-  [nzWidth]="720"
+  [nzClosable]="false"
   [nzVisible]="isVisibleDrawer"
-  nzTitle="Create"
-  [nzFooter]="footerTpl"
-  (nzOnClose)="close()">
-
-  <form nz-form [formGroup]="newPlayerForm" *nzDrawerContent>
-    <nz-row>
-      <nz-form-label nzFor="name">Name</nz-form-label>
-      <nz-col>
-        <nz-form-item>
-          <input type="text" autocomplete="none" nz-input formControlName="name"
-                 placeholder="Please input player name"/>
-        </nz-form-item>
-      </nz-col>
-    </nz-row>
-
-    <app-player-strength [formControl]="strengthFormControl"></app-player-strength>
-  </form>
-
-  <ng-template #footerTpl>
+  nzPlacement="right"
+  [nzTitle]="nzTitle"
+  [nzFooter]="footer"
+  (nzOnClose)="closeDrawer()"
+  nzSize="large"
+>
+  <ng-template #nzTitle>
+    <div class="drawer-title">
+      New Player(s)
+    </div>
+  </ng-template>
+  <ng-container *nzDrawerContent>
+    <nz-collapse>
+      <nz-collapse-panel
+        nzHeader="Add New Player"
+        nzActive="true"
+        nzShowArrow="true"
+      >
+        <ng-container>
+          <form nz-form [formGroup]="newPlayerForm">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
+              <nz-form-control [nzSpan]="10" nzErrorTip="Please input player name">
+                <input type="text" nz-input formControlName="name" placeholder="Please input player name"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="4" nzRequired nzFor="strength">
+                Strength
+              </nz-form-label>
+              <nz-form-control [nzSpan]="10" nzErrorTip="Please input player strength">
+                <input type="number" nz-input formControlName="strength" placeholder="Please input player strength"
+                       (ngModelChange)="onStrengthChange($event)"/>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </ng-container>
+      </nz-collapse-panel>
+      <nz-collapse-panel
+        nzHeader="Add New Players"
+        nzActive="false"
+        nzShowArrow="true"
+      >
+        <ng-container>
+          <label>
+            Her bir satıra bir oyuncu gelecek ve 'İsim{{separateKey}}strength{{separateKey}}position' şeklinde ekleme yapınız
+          </label>
+          <textarea style="margin:0;" rows="10" nz-input [(ngModel)]="inputValue"></textarea>
+        </ng-container>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </ng-container>
+  <ng-template #footer>
     <div style="float: right">
-      <button nz-button style="margin-right: 8px;" (click)="close()">Close</button>
-      <button nz-button nzType="primary" (click)="submit()">Submit</button>
+      <button nz-button style="margin-right: 8px;" (click)="closeDrawer()">Cancel</button>
+      <button nz-button nzType="primary" (click)="saveNewPlayer()">Save</button>
     </div>
   </ng-template>
 </nz-drawer>
+
+
+<nz-modal [(nzVisible)]="isVisibleTeamList"
+          nzTitle="Teams"
+          [nzFooter]="null"
+          (nzOnCancel)="handleCancelModal()"
+          nzWidth="990px">
+  <ng-container *nzModalContent>
+    <app-team-list [data]="teams"></app-team-list>
+  </ng-container>
+</nz-modal>
