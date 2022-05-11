@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Player, Team} from "@codefirst-io/team-builder/src/lib/models";
 import {AbidinoTeamBuilderService} from "@codefirst-io/team-builder";
 import {environment} from "../../environments/environment";
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -11,34 +12,29 @@ import {environment} from "../../environments/environment";
   styleUrls:  ['player-table.component.css']
 })
 export class PlayerTableComponent {
-  listOfColumn = [
-    {
-      title: 'Player',
-      compare: null,
-      priority: false
-    },
-    {
-      title: 'Strength',
-      priority: 3
-    },
-    {
-      title: 'Position',
-      priority: 2
-    },
-  ];
-
   playerList: Player[] = []
   isVisibleDrawer = false;
   isVisibleTeamList = false;
+  isVisiblePlayerEdit= false;
   inputValue!: string;
   separateKey = environment.separateKey;
   teams: Team[] = [];
+  data: any;
 
   newPlayerForm = this.fb.group({
     name: [null, [Validators.required]],
     strength: [null, [Validators.required]],
     position: [null]
   });
+
+  editPlayerForm = this.fb.group({
+    name: [null, [Validators.required]],
+    strength: [null, [Validators.required]],
+    position: [null]
+  });
+  selectedPlayer: any;
+  radioValue: any;
+
 
 
   get newPlayerStrengthFormControl(): FormControl{
@@ -47,6 +43,14 @@ export class PlayerTableComponent {
 
   get newPlayerNameFormControl(): FormControl{
     return this.newPlayerForm.get('name') as FormControl;
+  }
+
+  get editPlayerStrengthFormControl(): FormControl{
+    return this.editPlayerForm.get('strength') as FormControl;
+  }
+
+  get editPlayerNameFormControl(): FormControl{
+    return this.editPlayerForm.get('name') as FormControl;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -65,6 +69,14 @@ export class PlayerTableComponent {
       this.newPlayerStrengthFormControl.setValue(10);
     }else if(value < 0){
       this.newPlayerStrengthFormControl.setValue(0);
+    }
+  }
+
+  onEditStrengthChange(value: any) {
+    if(value > 10){
+      this.editPlayerStrengthFormControl.setValue(10);
+    }else if(value < 0){
+      this.editPlayerStrengthFormControl.setValue(0);
     }
   }
 
@@ -105,5 +117,50 @@ export class PlayerTableComponent {
 
   handleCancelModal(): void {
     this.isVisibleTeamList = false;
+  }
+
+  onFileChange(evt: any) {
+    const target : DataTransfer =  <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+      const wsname : string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+      this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+      let excelData = this.data.slice(1);
+      for(let line of excelData){
+        if(line[1]){
+          const newPlayer = new Player(line[0], Number(line[2]));
+          this.playerList = [...this.playerList, newPlayer];
+        }
+      }
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+
+  deletePlayer() {
+    this.playerList = this.playerList.filter(player => player.name !== this.radioValue);
+    this.radioValue = '';
+  }
+
+  editPlayer(){
+    const foundedPlayer = this.playerList.find(player => player.name === this.radioValue);
+    this.editPlayerNameFormControl.setValue(foundedPlayer?.name);
+    this.editPlayerStrengthFormControl.setValue(foundedPlayer?.strength);
+    this.isVisiblePlayerEdit = true;
+  }
+
+  handleCancelModalPlayerEdit() {
+    this.isVisiblePlayerEdit = false;
+  }
+
+  saveEditPlayer() {
+    const editPlayerIndex = this.playerList.findIndex(player => player.name === this.radioValue);
+    this.playerList[editPlayerIndex].name =this.editPlayerNameFormControl.value;
+    this.playerList[editPlayerIndex].strength =this.editPlayerStrengthFormControl.value;
+    this.isVisiblePlayerEdit = false;
   }
 }

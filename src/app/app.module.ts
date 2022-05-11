@@ -29,6 +29,7 @@ import {NzSpaceModule} from "ng-zorro-antd/space";
 import { TeamListComponent } from './team-list/team-list.component';
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzRadioModule} from "ng-zorro-antd/radio";
 
 registerLocaleData(en);
 
@@ -62,6 +63,7 @@ registerLocaleData(en);
     NzSpaceModule,
     NzListModule,
     NzModalModule,
+    NzRadioModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
