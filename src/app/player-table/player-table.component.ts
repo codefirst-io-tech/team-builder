@@ -111,8 +111,11 @@ export class PlayerTableComponent {
   }
 
   buildTeams() {
-    this.teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
-    this.isVisibleTeamList = true;
+    this.playAudio();
+    setTimeout(() => {
+      this.teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
+      this.isVisibleTeamList = true;
+    }, 3000);
   }
 
   handleCancelModal(): void {
@@ -162,5 +165,12 @@ export class PlayerTableComponent {
     this.playerList[editPlayerIndex].name =this.editPlayerNameFormControl.value;
     this.playerList[editPlayerIndex].strength =this.editPlayerStrengthFormControl.value;
     this.isVisiblePlayerEdit = false;
+  }
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/audio/cl-sound.wav";
+    audio.load();
+    audio.play();
   }
 }
