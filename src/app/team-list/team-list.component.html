@@ -13,7 +13,11 @@
       </nz-list-item-meta>
     </nz-list-item>
     <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
-  </nz-list></div>
+  </nz-list>
+    <div>
+      <i nz-icon nzType="usergroup-add" nzTheme="outline"></i>Team Avg = {{getAvg(team) | number }}
+    </div>
+  </div>
 </div>
 
 

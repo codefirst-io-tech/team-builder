@@ -8,4 +8,8 @@ import {Team} from "@codefirst-io/team-builder/src/lib/models";
 export class TeamListComponent {
   @Input()
   data:Team[] = [];
+
+  getAvg(team:Team){
+    return team.totalMemberStrength / team.members.length;
+  }
 }
