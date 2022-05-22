@@ -32,10 +32,7 @@ export class PlayerTableComponent {
     strength: [null, [Validators.required]],
     position: [null]
   });
-  selectedPlayer: any;
   radioValue: any;
-
-
 
   get newPlayerStrengthFormControl(): FormControl{
     return this.newPlayerForm.get('strength') as FormControl;
@@ -45,6 +42,11 @@ export class PlayerTableComponent {
     return this.newPlayerForm.get('name') as FormControl;
   }
 
+  get newPlayerPositionFormControl(): FormControl{
+    return this.newPlayerForm.get('position') as FormControl;
+  }
+
+
   get editPlayerStrengthFormControl(): FormControl{
     return this.editPlayerForm.get('strength') as FormControl;
   }
@@ -52,6 +54,11 @@ export class PlayerTableComponent {
   get editPlayerNameFormControl(): FormControl{
     return this.editPlayerForm.get('name') as FormControl;
   }
+
+  get editPlayerPositionFormControl(): FormControl{
+    return this.editPlayerForm.get('position') as FormControl;
+  }
+
 
   constructor(private fb: FormBuilder) {}
 
@@ -89,7 +96,7 @@ export class PlayerTableComponent {
   }
 
   saveSinglePlayer() {
-    const newPlayer = new Player(this.newPlayerNameFormControl.value, this.newPlayerStrengthFormControl.value);
+    const newPlayer = new Player(this.newPlayerNameFormControl.value, this.newPlayerStrengthFormControl.value, this.newPlayerPositionFormControl.value);
     this.playerList = [...this.playerList, newPlayer];
     this.newPlayerForm.reset();
   }
@@ -135,12 +142,13 @@ export class PlayerTableComponent {
       let excelData = this.data.slice(1);
       for(let line of excelData){
         if(line[1]){
-          const newPlayer = new Player(line[0], Number(line[2]));
+          const newPlayer = new Player(line[0], Number(line[2]), line[3]);
           this.playerList = [...this.playerList, newPlayer];
         }
       }
     };
     reader.readAsBinaryString(target.files[0]);
+    this.closeDrawer();
   }
 
 
@@ -153,6 +161,7 @@ export class PlayerTableComponent {
     const foundedPlayer = this.playerList.find(player => player.name === this.radioValue);
     this.editPlayerNameFormControl.setValue(foundedPlayer?.name);
     this.editPlayerStrengthFormControl.setValue(foundedPlayer?.strength);
+    this.editPlayerPositionFormControl.setValue(foundedPlayer?.preferredPosition);
     this.isVisiblePlayerEdit = true;
   }
 
@@ -164,6 +173,7 @@ export class PlayerTableComponent {
     const editPlayerIndex = this.playerList.findIndex(player => player.name === this.radioValue);
     this.playerList[editPlayerIndex].name =this.editPlayerNameFormControl.value;
     this.playerList[editPlayerIndex].strength =this.editPlayerStrengthFormControl.value;
+    this.playerList[editPlayerIndex].preferredPosition =this.editPlayerPositionFormControl.value;
     this.isVisiblePlayerEdit = false;
   }
 
