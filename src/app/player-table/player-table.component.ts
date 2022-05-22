@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Player, Team} from "@codefirst-io/team-builder/src/lib/models";
+import {Player, Position, Team} from "@codefirst-io/team-builder/src/lib/models";
 import {AbidinoTeamBuilderService} from "@codefirst-io/team-builder";
 import {environment} from "../../environments/environment";
 import * as XLSX from 'xlsx';
@@ -19,6 +19,7 @@ export class PlayerTableComponent {
   inputValue!: string;
   separateKey = environment.separateKey;
   teams: Team[] = [];
+  positions = Object.values(Position);
   data: any;
 
   newPlayerForm = this.fb.group({
@@ -119,10 +120,8 @@ export class PlayerTableComponent {
 
   buildTeams() {
     this.playAudio();
-    setTimeout(() => {
       this.teams = AbidinoTeamBuilderService.buildTeams(this.playerList);
       this.isVisibleTeamList = true;
-    }, 3000);
   }
 
   handleCancelModal(): void {

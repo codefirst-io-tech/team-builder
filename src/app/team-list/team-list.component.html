@@ -8,7 +8,11 @@
         nzDescription="{{ item.name }}"
       >
         <nz-list-item-meta-title>
-          <a>Strength : {{ item.strength }}</a>
+          <a appColor [tier] = "item.tier">Strength : {{ item.strength }}</a>
+        </nz-list-item-meta-title>
+
+        <nz-list-item-meta-title>
+          <a>Position : {{ item.preferredPosition }}</a>
         </nz-list-item-meta-title>
       </nz-list-item-meta>
     </nz-list-item>

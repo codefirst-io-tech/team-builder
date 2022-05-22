@@ -80,10 +80,7 @@
                 <nz-select
                   formControlName="position"
                   nzPlaceHolder="Select a position">
-                  <nz-option nzValue="Goalkeeper" nzLabel="Goalkeeper"></nz-option>
-                  <nz-option nzValue="Defender" nzLabel="Defender"></nz-option>
-                  <nz-option nzValue="Midfielder" nzLabel="Midfielder"></nz-option>
-                  <nz-option nzValue="Forward" nzLabel="Forward"></nz-option>
+                  <nz-option *ngFor="let position of positions" nzValue="{{position}}" nzLabel="{{position}}"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -96,6 +93,9 @@
         nzShowArrow="true"
       >
         <ng-container>
+          <div>
+            <a href="assets/file/excel-format.xlsx">Excel formatını indirebilirsiniz</a>
+          </div>
           <input type="file" (change)="onFileChange($event)" multiple="false" title="Import from excel" />
         </ng-container>
       </nz-collapse-panel>
@@ -149,10 +149,7 @@
           <nz-select
             formControlName="position"
             nzPlaceHolder="Select a position">
-            <nz-option nzValue="Goalkeeper" nzLabel="Goalkeeper"></nz-option>
-            <nz-option nzValue="Defender" nzLabel="Defender"></nz-option>
-            <nz-option nzValue="Midfielder" nzLabel="Midfielder"></nz-option>
-            <nz-option nzValue="Forward" nzLabel="Forward"></nz-option>
+            <nz-option *ngFor="let position of positions" nzValue="{{position}}" nzLabel="{{position}}"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Team} from "@codefirst-io/team-builder/src/lib/models";
+import {Team, Tier} from "@codefirst-io/team-builder/src/lib/models";
 
 @Component({
   selector: 'app-team-list',
