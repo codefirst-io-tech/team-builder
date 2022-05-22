@@ -30,6 +30,7 @@ import { TeamListComponent } from './team-list/team-list.component';
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzRadioModule} from "ng-zorro-antd/radio";
+import { ColorDirective } from './directives/color.directive';
 
 registerLocaleData(en);
 
@@ -38,6 +39,7 @@ registerLocaleData(en);
     AppComponent,
     PlayerTableComponent,
     TeamListComponent,
+    ColorDirective,
   ],
   imports: [
     BrowserModule,
