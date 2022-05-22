@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Input} from '@angular/core';
-import {Tier} from "@codefirst-io/team-builder/src/lib/models";
+import { Directive, ElementRef, Input } from '@angular/core';
+import { Tier } from '@codefirst-io/team-builder/src/lib/models';
 
 @Directive({
   selector: '[appColor]'

@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {AbidinoTeamBuilderService, Player, TeamBuilderService} from '@codefirst-io/team-builder';
-import {PlayerService} from "./player/player.service";
+import { Component } from '@angular/core';
+import { AbidinoTeamBuilderService, Player } from '@codefirst-io/team-builder';
+import { PlayerService } from './player/player.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,10 @@ import {PlayerService} from "./player/player.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  players :Player[] = [];
+  players: Player[] = [];
 
   title = 'team-builder';
+
   constructor(private playerService: PlayerService) {
 
     const players = [
@@ -35,7 +36,7 @@ export class AppComponent {
     });
   }
 
-  kadroOlustur(){
+  kadroOlustur() {
     console.log(this.players);
     const teams = AbidinoTeamBuilderService.buildTeams(this.players);
     console.log('Team 1: ' + teams[0].members.map(value => value.strength));

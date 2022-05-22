@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, NgModule } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {NzGridModule} from "ng-zorro-antd/grid";
-import {NzSliderModule} from "ng-zorro-antd/slider";
-import {NzInputNumberModule} from "ng-zorro-antd/input-number";
-import {NzFormModule} from "ng-zorro-antd/form";
+import { ChangeDetectionStrategy, Component, forwardRef, Input, NgModule } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 
 export const PLAYER_STRENGTH_SELECT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => PlayerStrengthComponent),
-  multi: true,
+  multi: true
 };
 
 @Component({
@@ -33,7 +33,7 @@ export const PLAYER_STRENGTH_SELECT_VALUE_ACCESSOR = {
     </nz-row>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [PLAYER_STRENGTH_SELECT_VALUE_ACCESSOR],
+  providers: [PLAYER_STRENGTH_SELECT_VALUE_ACCESSOR]
 })
 export class PlayerStrengthComponent implements ControlValueAccessor {
 
@@ -42,9 +42,11 @@ export class PlayerStrengthComponent implements ControlValueAccessor {
   value = this.min;
   disabled = false;
 
-  propagateChange = (_: number) => {};
+  propagateChange = (_: number) => {
+  };
 
-  propagateTouched = () => {};
+  propagateTouched = () => {
+  };
 
   writeValue(value: number): void {
     this.value = value;
