@@ -1,4 +1,4 @@
-import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { PlayerTableComponent } from './player-table.component';
 
 describe('PlayerTableComponent', () => {
@@ -7,9 +7,9 @@ describe('PlayerTableComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerTableComponent ]
+      declarations: [PlayerTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PlayerTableComponent);
     component = fixture.componentInstance;

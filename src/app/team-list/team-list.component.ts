@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Team} from "@codefirst-io/team-builder/src/lib/models";
+import { Component, Input } from '@angular/core';
+import { Team } from '@codefirst-io/team-builder/src/lib/models';
 
 @Component({
   selector: 'app-team-list',
@@ -7,9 +7,9 @@ import {Team} from "@codefirst-io/team-builder/src/lib/models";
 })
 export class TeamListComponent {
   @Input()
-  data:Team[] = [];
+  data: Team[] = [];
 
-  getAvg(team:Team){
+  getAvg(team: Team) {
     return team.totalMemberStrength / team.members.length;
   }
 }

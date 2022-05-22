@@ -8,9 +8,9 @@ describe('PlayerStrengthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayerStrengthComponent ]
+      declarations: [PlayerStrengthComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

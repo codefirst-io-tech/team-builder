@@ -3,12 +3,12 @@
         nz-button nzType="primary"
         style="margin-left: 5px;"
         (click)="buildTeams()">Create Teams
-  <i nz-icon nzType="right" ></i>
+  <i nz-icon nzType="right"></i>
 </button>
-<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="deletePlayer()" >Delete Player</button>
-<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="editPlayer()" >Edit Player</button>
-<br/>
-<br/>
+<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="deletePlayer()">Delete Player</button>
+<button *ngIf="radioValue" nz-button nzType="primary" style="margin-left: 5px;" (click)="editPlayer()">Edit Player</button>
+<br />
+<br />
 <nz-table #sortTable [nzData]="playerList" nzTableLayout="fixed">
   <thead>
   <tr>
@@ -22,12 +22,12 @@
   <tr *ngFor="let data of sortTable.data">
     <td>
       <nz-radio-group [(ngModel)]="radioValue">
-    <label nz-radio nzValue="{{ data.name }}"></label>
-    </nz-radio-group>
+        <label nz-radio nzValue="{{ data.name }}"></label>
+      </nz-radio-group>
     </td>
     <td>{{ data.name }}</td>
     <td>{{ data.strength }}</td>
-    <td>{{ data?.position }}</td>
+    <td>{{ data.preferredPosition }}</td>
   </tr>
   </tbody>
 </nz-table>
@@ -56,9 +56,11 @@
         <ng-container>
           <form nz-form [formGroup]="newPlayerForm">
             <nz-form-item>
-              <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
+              <nz-form-label [nzSpan]="4" nzRequired nzFor="name">
+                Name
+              </nz-form-label>
               <nz-form-control [nzSpan]="10" nzErrorTip="Please input player name">
-                <input type="text" nz-input formControlName="name" placeholder="Please input player name"/>
+                <input type="text" nz-input formControlName="name" placeholder="Please input player name" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -67,22 +69,22 @@
               </nz-form-label>
               <nz-form-control [nzSpan]="10" nzErrorTip="Please input player strength">
                 <input type="number" nz-input formControlName="strength" placeholder="Please input player strength"
-                       (ngModelChange)="onStrengthChange($event)"/>
+                       (ngModelChange)="onStrengthChange($event)" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="4" nzFor="position">
+                Position
+              </nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Please select your position!">
+                <nz-select
+                  formControlName="position"
+                  nzPlaceHolder="Select a position">
+                  <nz-option *ngFor="let position of positions" nzValue="{{position}}" nzLabel="{{position}}"></nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
           </form>
-        </ng-container>
-      </nz-collapse-panel>
-      <nz-collapse-panel
-        nzHeader="Add New Players"
-        nzActive="false"
-        nzShowArrow="true"
-      >
-        <ng-container>
-          <label>
-            Her bir satıra bir oyuncu gelecek ve 'İsim{{separateKey}}strength{{separateKey}}position' şeklinde ekleme yapınız
-          </label>
-          <textarea style="margin:0;" rows="10" nz-input [(ngModel)]="inputValue"></textarea>
         </ng-container>
       </nz-collapse-panel>
       <nz-collapse-panel
@@ -91,6 +93,9 @@
         nzShowArrow="true"
       >
         <ng-container>
+          <div>
+            <a href="assets/file/excel-format.xlsx">Excel formatını indirebilirsiniz</a>
+          </div>
           <input type="file" (change)="onFileChange($event)" multiple="false" title="Import from excel" />
         </ng-container>
       </nz-collapse-panel>
@@ -124,7 +129,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="4" nzRequired nzFor="name">Name</nz-form-label>
         <nz-form-control [nzSpan]="10" nzErrorTip="Please input player name">
-          <input type="text" nz-input formControlName="name" placeholder="Please input player name"/>
+          <input type="text" nz-input formControlName="name" placeholder="Please input player name" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -133,7 +138,19 @@
         </nz-form-label>
         <nz-form-control [nzSpan]="10" nzErrorTip="Please input player strength">
           <input type="number" nz-input formControlName="strength" placeholder="Please input player strength"
-                 (ngModelChange)="onEditStrengthChange($event)"/>
+                 (ngModelChange)="onEditStrengthChange($event)" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzFor="position">
+          Position
+        </nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="Please select your position!">
+          <nz-select
+            formControlName="position"
+            nzPlaceHolder="Select a position">
+            <nz-option *ngFor="let position of positions" nzValue="{{position}}" nzLabel="{{position}}"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </form>

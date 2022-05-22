@@ -1,19 +1,23 @@
 <div nz-row [nzGutter]="16">
-  <div nz-col nzSpan="12"*ngFor="let team of data">
+  <div nz-col nzSpan="12" *ngFor="let team of data">
     <nz-list nzItemLayout="horizontal">
-    <h3 [ngStyle]="{ 'margin-bottom.px': 16 }">{{team.name}}</h3>
-    <nz-list-item *ngFor="let item of team.members">
-      <nz-list-item-meta
-        nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        nzDescription="{{ item.name }}"
-      >
-        <nz-list-item-meta-title>
-          <a>Strength : {{ item.strength }}</a>
-        </nz-list-item-meta-title>
-      </nz-list-item-meta>
-    </nz-list-item>
-    <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
-  </nz-list>
+      <h3 [ngStyle]="{ 'margin-bottom.px': 16 }">{{team.name}}</h3>
+      <nz-list-item *ngFor="let item of team.members">
+        <nz-list-item-meta
+          nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          nzDescription="{{ item.name }}"
+        >
+          <nz-list-item-meta-title>
+            <a appColor [tier]="item.tier">Strength : {{ item.strength }}</a>
+          </nz-list-item-meta-title>
+
+          <nz-list-item-meta-title>
+            <a>Position : {{ item.preferredPosition }}</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+      </nz-list-item>
+      <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+    </nz-list>
     <div>
       <i nz-icon nzType="usergroup-add" nzTheme="outline"></i>Team Avg = {{getAvg(team) | number }}
     </div>

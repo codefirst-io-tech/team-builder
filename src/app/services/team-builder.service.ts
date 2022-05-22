@@ -7,49 +7,50 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class TeamBuilderService {
 
-  constructor(private notification: NzNotificationService) {}
+  constructor(private notification: NzNotificationService) {
+  }
 
-  isThisPlayerExist(playerName: String,playerList: Player[]): boolean{
+  isThisPlayerExist(playerName: String, playerList: Player[]): boolean {
     return playerList.some(player => player.name === playerName);
   }
 
-  areThesePlayersExist(players: Player[],playerList: Player[]){
+  areThesePlayersExist(players: Player[], playerList: Player[]) {
     const isEveryoneNotExist = players.every(newPlayer => playerList.some(oldPlayer => oldPlayer.name !== newPlayer.name));
     return !isEveryoneNotExist;
   }
 
-  addSinglePlayer(newPlayer: Player,playerList: Player[]){
-    if(this.isThisPlayerExist(newPlayer.name, playerList)){
+  addSinglePlayer(newPlayer: Player, playerList: Player[]) {
+    if (this.isThisPlayerExist(newPlayer.name, playerList)) {
       this.notification.create(
-        "error",
+        'error',
         'Çooook kritikkk',
         'Bu oyuncu zaten ekli olduğu için tekrar ekleyemezsiniz!'
       );
-    }else {
+    } else {
       playerList.push(newPlayer);
     }
   }
 
-  addNewPlayers(newPlayers: Player[], playerList: Player[]){
-    if(this.areThesePlayersExist(newPlayers, playerList)){
+  addNewPlayers(newPlayers: Player[], playerList: Player[]) {
+    if (this.areThesePlayersExist(newPlayers, playerList)) {
       this.notification.create(
-        "error",
+        'error',
         'Çooook kritikkk',
         'Bu oyuncular bazıları/hepsi zaten ekli olduğu için tekrar ekleyemezsiniz!'
       );
-    }else{
-      playerList = [...playerList,...newPlayers];
+    } else {
+      playerList = [...playerList, ...newPlayers];
     }
   }
 
-  deletePlayer(player: Player, playerList: Player[]){
+  deletePlayer(player: Player, playerList: Player[]) {
     const indexOfPlayer = playerList.indexOf(player);
-    if(indexOfPlayer !== -1){
+    if (indexOfPlayer !== -1) {
       playerList.splice(indexOfPlayer, 0);
     }
   }
 
-  deleteAllPlayers(playerList: Player[]){
+  deleteAllPlayers(playerList: Player[]) {
     playerList = [];
   }
 }
