@@ -38,3 +38,9 @@ nz-footer {
 .table {
   margin-top: 25px;
 }
+
+nz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
