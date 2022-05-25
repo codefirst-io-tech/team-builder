@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AbidinoTeamBuilderService } from '@codefirst-io/team-builder';
 import { Player, Position, Team } from '@codefirst-io/team-builder/src/lib/models';
 import * as XLSX from 'xlsx';
 import { environment } from '../../environments/environment';
-
 
 @Component({
   selector: 'app-player-table',
@@ -34,6 +33,13 @@ export class PlayerTableComponent {
     position: [null]
   });
   radioValue: any;
+
+  @HostListener('document:keydown.enter', ['$event']) onKeydownHandler() {
+    if (this.newPlayerNameFormControl.value && this.newPlayerStrengthFormControl.value) {
+      // TODO: hostlistener'i tum componentte yapmak yerine modal'i bir component yapip sadece onuda kullanabiliriz.
+      this.saveNewPlayer();
+    }
+  }
 
   get newPlayerStrengthFormControl(): FormControl {
     return this.newPlayerForm.get('strength') as FormControl;
