@@ -4,7 +4,7 @@
       <h3 [ngStyle]="{ 'margin-bottom.px': 16 }">{{team.name}}</h3>
       <nz-list-item *ngFor="let item of team.members">
         <nz-list-item-meta
-          nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          nzAvatar="{{getAvatar(item.name)}}"
           nzDescription="{{ item.name }}"
         >
           <nz-list-item-meta-title>
