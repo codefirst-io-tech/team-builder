@@ -154,7 +154,7 @@ export class PlayerTableComponent {
               strengts.push(Number(line[i]))
             }
           }
-          const avgStrengt = Calculate.getAvgStrengt(strengts);
+          const avgStrengt = Calculate.getWeightedAvgStrengt(strengts);
           const newPlayer = new Player(line[0], avgStrengt, line[2]);
           this.playerList = [...this.playerList, newPlayer];
         }

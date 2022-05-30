@@ -1,5 +1,5 @@
 export class Calculate {
-  static getAvgStrengt(strengths:number[]): number {
+  static getWeightedAvgStrengt(strengths:number[]): number {
     let sum = 0;
     for (let i = 0; i < strengths.length; i++) {
       let v = strengths[i] * (i + 1);
