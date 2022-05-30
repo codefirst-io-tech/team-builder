@@ -148,7 +148,6 @@ export class PlayerTableComponent {
       let excelData = this.data.slice(1);
       for (let line of excelData) {
         if (line[1]) {
-          console.log(line)
           let strengts = [];
           for (let i = 3; i < line.length; i++) {
             if (Number(line[i])) {
