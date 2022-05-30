@@ -1,10 +1,10 @@
-import {Component, HostListener} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
-import {AbidinoTeamBuilderService} from '@codefirst-io/team-builder';
-import {Player, Position, Team} from '@codefirst-io/team-builder/src/lib/models';
+import { Component, HostListener } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbidinoTeamBuilderService } from '@codefirst-io/team-builder';
+import { Player, Position, Team } from '@codefirst-io/team-builder/src/lib/models';
 import * as XLSX from 'xlsx';
-import {environment} from '../../environments/environment';
-import {Calculate} from "../util/calculate";
+import { environment } from '../../environments/environment';
+import { Calculator } from '../util/calculator';
 
 @Component({
   selector: 'app-player-table',
@@ -141,20 +141,20 @@ export class PlayerTableComponent {
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
       const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-      this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
+      this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
       let excelData = this.data.slice(1);
       for (let line of excelData) {
         if (line[1]) {
           let strengts = [];
           for (let i = 3; i < line.length; i++) {
             if (Number(line[i])) {
-              strengts.push(Number(line[i]))
+              strengts.push(Number(line[i]));
             }
           }
-          const avgStrengt = Calculate.getWeightedAvgStrengt(strengts);
+          const avgStrengt = Calculator.getWeightedAvgStrength(strengts);
           const newPlayer = new Player(line[0], avgStrengt, line[2]);
           this.playerList = [...this.playerList, newPlayer];
         }
