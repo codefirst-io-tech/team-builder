@@ -1,9 +1,10 @@
-import { Component, HostListener } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AbidinoTeamBuilderService } from '@codefirst-io/team-builder';
-import { Player, Position, Team } from '@codefirst-io/team-builder/src/lib/models';
+import {Component, HostListener} from '@angular/core';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {AbidinoTeamBuilderService} from '@codefirst-io/team-builder';
+import {Player, Position, Team} from '@codefirst-io/team-builder/src/lib/models';
 import * as XLSX from 'xlsx';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
+import {Calculate} from "../util/calculate";
 
 @Component({
   selector: 'app-player-table',
@@ -34,11 +35,7 @@ export class PlayerTableComponent {
   });
   radioValue: any;
 
-  @HostListener('document:keydown.enter', ['$event']) onKeydownHandler() {
-    if (this.newPlayerNameFormControl.value && this.newPlayerStrengthFormControl.value) {
-      // TODO: hostlistener'i tum componentte yapmak yerine modal'i bir component yapip sadece onuda kullanabiliriz.
-      this.saveNewPlayer();
-    }
+  constructor(private fb: FormBuilder) {
   }
 
   get newPlayerStrengthFormControl(): FormControl {
@@ -66,10 +63,12 @@ export class PlayerTableComponent {
     return this.editPlayerForm.get('position') as FormControl;
   }
 
-
-  constructor(private fb: FormBuilder) {
+  @HostListener('document:keydown.enter', ['$event']) onKeydownHandler() {
+    if (this.newPlayerNameFormControl.value && this.newPlayerStrengthFormControl.value) {
+      // TODO: hostlistener'i tum componentte yapmak yerine modal'i bir component yapip sadece onuda kullanabiliriz.
+      this.saveNewPlayer();
+    }
   }
-
 
   closeDrawer(): void {
     this.isVisibleDrawer = false;
@@ -142,14 +141,22 @@ export class PlayerTableComponent {
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
       const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+      const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-      this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+      this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
       let excelData = this.data.slice(1);
       for (let line of excelData) {
         if (line[1]) {
-          const newPlayer = new Player(line[0], Number(line[2]), line[3]);
+          console.log(line)
+          let strengts = [];
+          for (let i = 3; i < line.length; i++) {
+            if (Number(line[i])) {
+              strengts.push(Number(line[i]))
+            }
+          }
+          const avgStrengt = Calculate.getAvgStrengt(strengts);
+          const newPlayer = new Player(line[0], avgStrengt, line[2]);
           this.playerList = [...this.playerList, newPlayer];
         }
       }
