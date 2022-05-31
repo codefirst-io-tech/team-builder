@@ -19,6 +19,9 @@
       <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
     </nz-list>
     <div>
+      Forma Rengi : {{getTeamColor(team)}}
+    </div>
+    <div>
       <i nz-icon nzType="usergroup-add" nzTheme="outline"></i>Team Avg = {{getAvg(team) | number }}
     </div>
   </div>

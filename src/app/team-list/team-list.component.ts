@@ -21,4 +21,8 @@ export class TeamListComponent {
     };
     return players[name] || players["default"];
   }
+
+  getTeamColor(team: Team) :string{
+    return team.name === 'Team 1' ? 'Mavi' : 'Beyaz'
+  }
 }
